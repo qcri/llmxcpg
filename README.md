@@ -8,6 +8,20 @@ The core methodology involves a two-phase process:
 
 2. **Vulnerability Detection**: A second LLM analyzes the extracted code slice to classify it as either vulnerable or safe.
 
+## Citation
+
+If you use this codebase in your research, please cite the associated paper:
+
+```
+@inproceedings{lekssays2025llmxcpg,
+  title={$\{$LLMxCPG$\}$:$\{$Context-Aware$\}$ Vulnerability Detection Through Code Property $\{$Graph-Guided$\}$ Large Language Models},
+  author={Lekssays, Ahmed and Mouhcine, Hamza and Tran, Khang and Yu, Ting and Khalil, Issa},
+  booktitle={34th USENIX Security Symposium (USENIX Security 25)},
+  pages={489--507},
+  year={2025}
+}
+```
+
 ## Issues
 
 If you encounter any issues with our codebase, please **open an issue in the repository**. This is the most effective way for us to assist you.
@@ -65,11 +79,3 @@ The models can be fine-tuned using the scripts provided in the `training/` direc
 
 The training process uses the [Unsloth](https://unsloth.ai) framework and employs Low-Rank Adaptation (LoRA) for efficient fine-tuning. Refer to the scripts and configurations in the `training/` directory for details.
 
-
-## Citation
-
-If you use this codebase in your research, please cite the associated paper:
-
-```
-To appear in USENIX Security 2025
-```
