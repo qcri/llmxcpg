@@ -29,7 +29,7 @@ WORKDIR /app
 # Create Python script using a better method to handle newlines
 RUN printf '%s\n' \
     'from huggingface_hub import hf_hub_download' \
-    'repo_id = "qcri-cs/llmxcpg-code"' \
+    'repo_id = "QCRI/LLMxCPG-Code"' \
     'filename = "all_source_code.zip"' \
     'print(f"Attempting to download {filename} from {repo_id}...")' \
     'file_path = hf_hub_download(repo_id=repo_id, filename=filename, repo_type="dataset", local_dir="/app")' \
@@ -48,7 +48,7 @@ RUN mkdir joern && cd joern \
 
 # Extract the downloaded zip file into Joern installation directory
 RUN mkdir -p /opt/joern/joern-cli && \
-    unzip -j /app/all_srouce_code.zip -d /opt/joern/joern-cli
+    unzip -j /app/all_source_code.zip -d /opt/joern/joern-cli
 
 # Expose the port that Joern will use
 EXPOSE 9685
