@@ -25,7 +25,7 @@ def load_json_dataset(file_path: str, eval_split_ratio: float = 0.1) -> tuple[Da
     with open(file_path, 'r') as f:
         data = json.load(f)
 
-    with open("./../prompts/query_system_prompt_new.txt", 'r') as f: # TODO: CHANGE BEFORE PUSH
+    with open("./../prompts/query_system_prompt.txt", 'r') as f:
         system_prompt = f.read()
 
     conversations = []
