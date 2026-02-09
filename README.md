@@ -6,7 +6,7 @@
 - **[2025.10]** *LLMxCPG* is accepted to the **MENA CSAW Applied Research Competition (ARC) 2025**.
 - **[2025.08]** *PatchAgent* is presented at **USENIX Security 2025**.
 
-# Overview
+## Overview
 
 This repository contains the source code for **LLMxCPG**, a framework for vulnerability detection using Code Property Graphs (CPG) and Large Language Models (LLM).
 
