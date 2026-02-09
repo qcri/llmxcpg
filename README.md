@@ -1,5 +1,13 @@
 # LLMxCPG: Context-Aware Vulnerability Detection Through Code Property Graph-Guided Large Language Models
 
+## 📣 News
+
+- **[2025.11]** *LLMxCPG* wins the **MENA CSAW Applied Research Competition (ARC) 2025**.
+- **[2025.10]** *LLMxCPG* is accepted to the **MENA CSAW Applied Research Competition (ARC) 2025**.
+- **[2025.08]** *PatchAgent* is presented at **USENIX Security 2025**.
+
+# Overview
+
 This repository contains the source code for **LLMxCPG**, a framework for vulnerability detection using Code Property Graphs (CPG) and Large Language Models (LLM).
 
 The core methodology involves a two-phase process:
@@ -7,6 +15,8 @@ The core methodology involves a two-phase process:
 1. **Slice Construction**: An LLM generates specific queries for a Code Property Graph to extract a minimal, relevant "slice" of code that may contain a vulnerability.
 
 2. **Vulnerability Detection**: A second LLM analyzes the extracted code slice to classify it as either vulnerable or safe.
+
+
 
 ## Citation
 
