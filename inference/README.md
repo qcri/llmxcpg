@@ -44,7 +44,7 @@ Datasets: `formai`, `primevul`, `reposvul`, `pkco`, `sven`.
 Example:
 
 ```bash
-python3 detect_inference.py formai --base-model /workspace/QwQ-32B-Preview --model_path /workspace/QCRI__LLMxCPG-D
+python3 detect_inference.py formai --base-model /workspace/QwQ-32B-Preview --model-path /workspace/QCRI__LLMxCPG-D
 ```
 
 You can also override the default threshold for the dataset:
