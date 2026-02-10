@@ -4,7 +4,7 @@
 
 - **[2025.11]** *LLMxCPG* wins the **MENA CSAW Applied Research Competition (ARC) 2025**.
 - **[2025.10]** *LLMxCPG* is accepted to the **MENA CSAW Applied Research Competition (ARC) 2025**.
-- **[2025.08]** *PatchAgent* is presented at **USENIX Security 2025**.
+- **[2025.08]** *LLMxCPG* is presented at **USENIX Security 2025**.
 
 ## Overview
 
