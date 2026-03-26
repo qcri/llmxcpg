@@ -121,18 +121,19 @@ class DatasetProcessor:
 
         # Initialize components (intentionally after the event loop is setup)
         self.joern_manager = JoernManager(self.port, self.compose_file)
-        model_type_map = {
-            "deepseek": Model.DEEPSEEK,
-            "vllm": Model.VLLM,
-        }
-        model_type = model_type_map.get(self.llm_model_type.lower())
-        if model_type is None:
-            raise ValueError(f"Unsupported llm_model_type: {self.llm_model_type}")
-
-        self.llm_manager = LLMManager(model_type, self.llm_model_name, port=self.llm_port)
 
         active_joern_project = None # Track the currently loaded project filename
+        self.sample_log_buffer = []  # Ensure log buffer exists for error handling
         try:
+            model_type_map = {
+                "deepseek": Model.DEEPSEEK,
+                "vllm": Model.VLLM,
+            }
+            model_type = model_type_map.get(self.llm_model_type.lower())
+            if model_type is None:
+                raise ValueError(f"Unsupported llm_model_type: {self.llm_model_type}")
+
+            self.llm_manager = LLMManager(model_type, self.llm_model_name, port=self.llm_port)
             num_samples = len(self.dataset_slice)
             for i, sample in enumerate(self.dataset_slice):
                 self.current_sample_uuid = sample.get("uuid", "N/A")
