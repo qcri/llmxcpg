@@ -27,6 +27,7 @@ python generate_and_run_queries.py -d /path/to/your/dataset.json -o /path/to/you
 ```
 -d /path/to/your/dataset.json: Specifies the path to the JSON file containing the code samples to be processed.
 -o /path/to/your/output_dir: Sets the base directory where the script will create results/ and logs/ subdirectories to store its output.
+--llm-model-type vLLM: Specifies the LLM backend implementation to use (for example, `vLLM` for a local vLLM server).
 --llm-model-name LLMxCPG-Q: Sets the model name sent in the OpenAI-compatible request payload.
 --llm-port 9001: Port where your local vLLM server is running.
 
