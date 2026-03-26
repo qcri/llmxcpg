@@ -33,6 +33,29 @@ python generate_and_run_queries.py -d /path/to/your/dataset.json -o /path/to/you
 
 The script offers several optional arguments to customize its behavior.  For example, you can adjust the number of worker threads (-n), specify a different Docker Compose file for Joern (-c), or change the port used for the LLM (--llm-port).  To see a full list of available arguments and their descriptions, run the script with the -h or --help flag:
 
+### Run LLMxCPG-Q by vllm
+
+You can launch a local OpenAI-compatible endpoint with the helper script:
+
+```bash
+python run_vllm_server.py --model-id QCRI/LLMxCPG-Q --port 9001
+```
+
+Then run query generation with the local endpoint:
+
+```bash
+python generate_and_run_queries.py \
+	-d /path/to/your/dataset.json \
+	-o /path/to/your/output_dir \
+	--llm-model-type vLLM \
+	--llm-model-name LLMxCPG-Q \
+	--llm-port 9001
+```
+
+Notes:
+- Need [vllm](https://github.com/vllm-project/vllm) : uv pip install vllm --torch-backend=auto
+- Endpoint URL is `http://127.0.0.1:9001/v1/chat/completions` by default.
+
 ### Generate queries for your custom vulnerability dataset
 
 To be able to use our script `generate_and_run_queries.py`, please follow these steps:
