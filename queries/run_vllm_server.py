@@ -73,9 +73,6 @@ def parse_args() -> argparse.Namespace:
 
     args = parser.parse_args()
 
-    if args.lora_adapter and not args.base_model:
-        parser.error("--base-model is required when --lora-adapter is used.")
-
     return args
 
 
