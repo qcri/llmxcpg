@@ -33,7 +33,7 @@ python generate_and_run_queries.py -d /path/to/your/dataset.json -o /path/to/you
 
 The script offers several optional arguments to customize its behavior.  For example, you can adjust the number of worker threads (-n), specify a different Docker Compose file for Joern (-c), or change the port used for the LLM (--llm-port).  To see a full list of available arguments and their descriptions, run the script with the -h or --help flag:
 
-### Run LLMxCPG-Q by vllm
+### Run LLMxCPG-Q by vLLM
 
 You can launch a local OpenAI-compatible endpoint with the helper script:
 
