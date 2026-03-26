@@ -6,7 +6,7 @@ import time
 import argparse
 import logging
 from typing import List, Dict
-from Components.model import LLMManager
+from Components.model import LLMManager, Model
 from Components.joern_manager import JoernManager
 
 # --- Configuration for Logging ---
@@ -64,7 +64,7 @@ class DatasetProcessor:
                  logs_file: str,
                  compose_file: str,
                  llm_model_type: str,
-                 llm_endpoint: str,
+                 llm_model_name: str,
                  llm_port: int,
                  joern_recreate_interval: int):
         """
@@ -77,7 +77,7 @@ class DatasetProcessor:
             logs_file: Path to the file to store detailed logs/errors for this thread.
             compose_file: Path to the Docker compose file for Joern.
             llm_model_type: Identifier string for the LLM model type (e.g., "DeepSeek").
-            llm_endpoint: URL/path for the LLM service.
+            llm_model_name: Model identifier passed to the completion API (e.g., local model name).
             llm_port: Port for the LLM service.
             joern_recreate_interval: Number of samples to process before recreating Joern server.
         """
@@ -88,7 +88,7 @@ class DatasetProcessor:
         self.compose_file = compose_file
         self.joern_recreate_interval = joern_recreate_interval
         self.llm_model_type = llm_model_type
-        self.llm_endpoint = llm_endpoint
+        self.llm_model_name = llm_model_name
         self.llm_port = llm_port
 
         self.current_sample_uuid = ""
@@ -121,10 +121,19 @@ class DatasetProcessor:
 
         # Initialize components (intentionally after the event loop is setup)
         self.joern_manager = JoernManager(self.port, self.compose_file)
-        self.llm_manager = LLMManager(self.llm_model_type, self.llm_endpoint, port=self.llm_port)
 
         active_joern_project = None # Track the currently loaded project filename
+        self.sample_log_buffer = []  # Ensure log buffer exists for error handling
         try:
+            model_type_map = {
+                "deepseek": Model.DEEPSEEK,
+                "vllm": Model.VLLM,
+            }
+            model_type = model_type_map.get(self.llm_model_type.lower())
+            if model_type is None:
+                raise ValueError(f"Unsupported llm_model_type: {self.llm_model_type}")
+
+            self.llm_manager = LLMManager(model_type, self.llm_model_name, port=self.llm_port)
             num_samples = len(self.dataset_slice)
             for i, sample in enumerate(self.dataset_slice):
                 self.current_sample_uuid = sample.get("uuid", "N/A")
@@ -377,8 +386,8 @@ def main():
     # LLM related arguments
     parser.add_argument("--llm-model-type", type=str, choices=["vLLM", "DeepSeek"], default="vLLM", # Default based on original code
                         help="Identifier string for the type of LLM model to use (e.g., 'vLLM', 'DeepSeek'). Passed to LLMManager.")
-    parser.add_argument("--llm-endpoint", type=str, required=True,
-                        help="Endpoint URL or path for the LLM service (e.g., '/path/to/model' or 'http://host:port').")
+    parser.add_argument("--llm-model-name", "--llm-endpoint", dest="llm_model_name", type=str, required=True,
+                        help="Model name passed to the API payload. '--llm-endpoint' is supported as a deprecated alias.")
     parser.add_argument("--llm-port", type=int, default=9001,
                         help="Port number for the LLM service.")
 
@@ -451,7 +460,7 @@ def main():
             logs_file=logs_file,
             compose_file=args.compose_file,
             llm_model_type=args.llm_model_type,
-            llm_endpoint=args.llm_endpoint,
+            llm_model_name=args.llm_model_name,
             llm_port=args.llm_port,
             joern_recreate_interval=args.joern_recreate_interval
         )

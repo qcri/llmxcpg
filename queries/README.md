@@ -23,11 +23,13 @@ This script is responsible for:
 Here's an example of how to run the `generate_and_run_queries.py` script with the essential arguments:
 
 ```bash
-python generate_and_run_queries.py -d /path/to/your/dataset.json -o /path/to/your/output_dir --llm-endpoint [http://your.llm.host](http://your.llm.host):port
+python generate_and_run_queries.py -d /path/to/your/dataset.json -o /path/to/your/output_dir --llm-model-type vLLM --llm-model-name LLMxCPG-Q --llm-port 9001
 ```
 -d /path/to/your/dataset.json: Specifies the path to the JSON file containing the code samples to be processed.
 -o /path/to/your/output_dir: Sets the base directory where the script will create results/ and logs/ subdirectories to store its output.
---llm-endpoint http://your.llm.host:port: Provides the endpoint (URL in this case) where the LLM service is running. Adjust the URL and port as needed.
+--llm-model-type vLLM: Specifies the LLM backend implementation to use (for example, `vLLM` for a local vLLM server).
+--llm-model-name LLMxCPG-Q: Sets the model name sent in the OpenAI-compatible request payload.
+--llm-port 9001: Port where your local vLLM server is running.
 
 *Optional Arguments:*
 
